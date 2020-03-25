@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="../assets/tblcode/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../assets/tblcode/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="../assets/tblcode/datatables.net-select/css/select.bootstrap4.min.css">
+  <!-- Alert plugins -->
+  <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon-dashboard.css" type="text/css">
   <!-- Google Tag Manager -->
@@ -153,7 +155,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Expense</a>
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">
@@ -225,7 +227,12 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header">
-              <h3 class="mb-0">Expense</h3>
+              <h3 class="mb-0">Expense
+                <button class="btn btn-icon btn-primary" style="float: right; width: 180px;" type="button" data-toggle="modal" data-target="#modal-form">
+                  <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                  <span class="btn-inner--text">Add Expense</span>
+                </button>
+              </h3>
             </div>
             <div class="table-responsive py-4">
               <table class="table table-flush" id="datatable-basic">
@@ -257,14 +264,63 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Delete</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-form">Edit</a>
+                          <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="question">Delete</a>
                         </div>
                       </div>
                     </td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card-body px-lg-5 ">
+                <div class="text-center text-muted mb-5">
+                  <h4>Add Expense</h4>
+                </div>    
+                <form role="form">
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-align-left-2 text-primary"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Description" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-money-bill-alt text-green"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Amount" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-bullet-list-67 text-red"></i></span>
+                      </div>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Personal</option>
+                        <option>Office</option>
+                        <option>Home</option>
+                      </select>
+                    </div>
+                  <div class="modal-footer mt-5">
+                    <button class="btn btn-icon btn-success">
+                      <span class="btn-inner--icon"><i class="ni ni-plus"></i></span>
+                      <span class="btn-inner--text">Submit</span>
+                    </button>
+                    <button type="button" class="btn btn-link text-danger ml-auto" data-dismiss="modal">Close</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -312,9 +368,12 @@
   <script src="../assets/tblcode/datatables.net-buttons/js/buttons.flash.min.js"></script>
   <script src="../assets/tblcode/datatables.net-buttons/js/buttons.print.min.js"></script>
   <script src="../assets/tblcode/datatables.net-select/js/dataTables.select.min.js"></script>
+  <!-- Alert JS -->
+  <script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="../assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.min.js"></script>
-
+  <script src="../assets/js/demo.min.js"></script>
 </body>
 
 </html>
