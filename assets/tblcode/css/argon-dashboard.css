@@ -18334,7 +18334,23 @@ textarea[resize="horizontal"] {
 .separator-skew {
   height: 60px;
 }
-
+.dataTables_info, .dataTables_length, .dt-buttons {
+  padding-left: 1.5rem;
+}
+.dataTables_filter {
+  display: inline-block;
+  float: right;
+  padding-right: 1.5rem;
+}
+.dataTables_wrapper {
+  font-size: .875rem;
+}
+table.dataTable tbody > tr.selected {
+  background-color: #5e72e4;
+}
+.dataTables_paginate {
+  padding-right: 1.5rem;
+}
 @media (min-width: 1200px) {
   .separator-skew {
     height: 70px;
@@ -20659,21 +20675,5 @@ pre>code.highlight {
 .ct-footer-links li+li {
   margin-left: 1rem;
 }
-.dataTables_info, .dataTables_length, .dt-buttons {
-  padding-left: 1.5rem;
-}
-.dataTables_filter {
-  display: inline-block;
-  float: right;
-  padding-right: 1.5rem;
-}
-.dataTables_wrapper {
-  font-size: .875rem;
-}
-table.dataTable tbody > tr.selected {
-  background-color: #5e72e4;
-}
-.dataTables_paginate {
-  padding-right: 1.5rem;
-}
+
 /*# sourceMappingURL=dashboard-free.css.map */
