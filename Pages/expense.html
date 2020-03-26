@@ -20,11 +20,14 @@
   <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon-dashboard.css" type="text/css">
+  <script type="text/javascript" src="../assets/js/angular.min.js"></script>
+  <script type="text/javascript" src="../assets/js/app.js"></script>
+
   <!-- Google Tag Manager -->
   
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="mycontroller">
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
@@ -246,15 +249,14 @@
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>System Purchase</td>
-                    <td>$150</td>
+                  <tr ng-repeat = "user in users">
+                    <td>{{$index+1}}</td>
+                    <td>{{user.userdescription}}</td>
+                    <td>{{user.useramount}}</td>
                     <td>
                       <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i> Personal
+                        <i class="bg-warning"></i> {{user.usercategory}}
                       </span>
                     </td>
                     <td>2011/04/25</td>
@@ -264,8 +266,8 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-form">Edit</a>
-                          <a class="dropdown-item" href="#" data-toggle="sweet-alert" data-sweet-alert="question">Delete</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-formEdit">Edit</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-formDelete">Delete</a>
                         </div>
                       </div>
                     </td>
@@ -276,55 +278,7 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-body p-0">
-              <div class="card-body px-lg-5 ">
-                <div class="text-center text-muted mb-5">
-                  <h4>Add Expense</h4>
-                </div>    
-                <form role="form">
-                  <div class="form-group mb-3">
-                    <div class="input-group input-group-merge input-group-alternative">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-align-left-2 text-primary"></i></span>
-                      </div>
-                      <input class="form-control" placeholder="Description" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group mb-3">
-                    <div class="input-group input-group-merge input-group-alternative">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-money-bill-alt text-green"></i></span>
-                      </div>
-                      <input class="form-control" placeholder="Amount" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group mb-3">
-                    <div class="input-group input-group-merge input-group-alternative">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-bullet-list-67 text-red"></i></span>
-                      </div>
-                      <select class="form-control" id="exampleFormControlSelect1">
-                        <option>Personal</option>
-                        <option>Office</option>
-                        <option>Home</option>
-                      </select>
-                    </div>
-                  <div class="modal-footer mt-5">
-                    <button class="btn btn-icon btn-success">
-                      <span class="btn-inner--icon"><i class="ni ni-plus"></i></span>
-                      <span class="btn-inner--text">Submit</span>
-                    </button>
-                    <button type="button" class="btn btn-link text-danger ml-auto" data-dismiss="modal">Close</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <!-- Footer -->
       <footer class="py-5">
         <div class="container">
@@ -352,6 +306,126 @@
       </footer>
     </div>
   </div>
+  <!-- Add Expense -->
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card-body px-lg-5 ">
+            <div class="text-center text-muted mb-5">
+              <h4>Add Expense</h4>
+            </div>    
+            <form role="form">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-align-left-2 text-primary"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Description" type="text" ng-model="newUser.userdescription">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-money-bill-alt text-green"></i></span>
+                  </div>
+                  <input id="amount" class="form-control" placeholder="Amount" type="text" ng-model="newUser.useramount">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-bullet-list-67 text-red"></i></span>
+                  </div>
+                  <select class="form-control" id="exampleFormControlSelect1" ng-model="newUser.usercategory">
+                    <option>Personal</option>
+                    <option>Office</option>
+                    <option>Home</option>
+                  </select>
+                </div>
+              <div class="modal-footer mt-5">
+                <button class="btn btn-icon btn-success" type="submit" ng-click="saveUser()">
+                  <span class="btn-inner--icon"><i class="ni ni-plus"></i></span>
+                  <span class="btn-inner--text">Submit</span>
+                </button>
+                <button type="button" class="btn btn-link text-danger ml-auto" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Expense -->
+  <div class="modal fade" id="modal-formEdit" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card-body px-lg-5 ">
+            <div class="text-center text-muted mb-5">
+              <h4>Edit Expense</h4>
+            </div>    
+            <form role="form">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-align-left-2 text-primary"></i></span>
+                  </div>
+                  <input id="destp" class="form-control" placeholder="Description" type="text" ng-modal="clickedUser.userdescription">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-money-bill-alt text-green"></i></span>
+                  </div>
+                  <input id="amount" class="form-control" placeholder="Amount" type="text" ng-modal="clickedUser.useramount">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-bullet-list-67 text-red"></i></span>
+                  </div>
+                  <select class="form-control" id="exampleFormControlSelect1" ng-modal="clickedUser.usercategory">
+                    <option>Personal</option>
+                    <option>Office</option>
+                    <option>Home</option>
+                  </select>
+                </div>
+              <div class="modal-footer mt-5">
+                <button class="btn btn-icon btn-success" type="button" ng-click="updateUser()" data-dismiss="modal">
+                  <span class="btn-inner--icon"><i class="ni ni-plus"></i></span>
+                  <span class="btn-inner--text">Save</span>
+                </button>
+                <button type="button" class="btn btn-link text-danger ml-auto" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Expense -->
+  <div class="modal fade" id="modal-formDelete" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card-body px-lg-5 ">
+            <div class="text-center text-muted mb-5">
+              <h4>Are you sure?</h4>
+            </div>
+              You are going to delete...
+          </div>
+          <div class="model-footer">
+            <button type="button" class="btn btn-link text-danger ml-auto" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-link text-danger ml-auto" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../assets/tblcode/jquery/dist/jquery.min.js"></script>
@@ -374,6 +448,30 @@
   <!-- Argon JS -->
   <script src="../assets/js/argon.min.js"></script>
   <script src="../assets/js/demo.min.js"></script>
+  <!-- <script>
+    function archiveFunction() {
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form; // storing the form
+        swal({
+          title: "Are you sure?",
+          text: "But you will still be able to retrieve this file.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, archive it!",
+          cancelButtonText: "No, cancel please!",
+          closeOnConfirm: false,
+          closeOnCancel: false
+        },
+        function(isConfirm){
+          if (isConfirm) {
+            form.submit();          // submitting the form when user press yes
+          } else {
+            swal("Cancelled", "Your imaginary file is safe :)", "error");
+          }
+        });
+        }
+  </script> -->
 </body>
 
 </html>
